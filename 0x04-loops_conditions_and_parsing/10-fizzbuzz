@@ -1,18 +1,13 @@
 #!/usr/bin/env bash
-#Program that prints FizzBuzz sequence
-
-for num in {1..100}
-do
-	if [ $((num % 5)) -eq 0 -a $((num % 3)) -eq 0 ]
-	then
+# This script is displaying fizzbuzz challenge
+for i in {1..100};do
+	if [[ $((i%3)) -eq 0 && $((i%5)) -eq 0 ]];then
 		echo "FizzBuzz"
-	elif [ $((num % 5)) -eq 0 ]
-	then
-		echo "Buzz"
-	elif [ $((num % 3)) -eq 0 ]
-	then
+	elif [[ $((i%3)) -eq 0 ]];then
 		echo "Fizz"
+	elif [[ $((i%5)) -eq 0 ]];then
+		echo "Buzz"
 	else
-		echo "$num"
+		echo "$i"
 	fi
 done
