@@ -12,8 +12,5 @@ do
 	COMMAND=$(echo "$line" | cut -f 7 -d ':')
 
 
-	echo -n "The user $USERNAME is part of the $GROUP_ID gang, "
-	echo -n "lives in $HOME_DIRECTORY and rides $COMMAND."
-	echo -n "$USERID's place is protected by the passcode $PASSWORD, "
-	echo "more info about the user here: $USERIDINFO"
+	echo "The user $USERNAME is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $COMMAND. $USERID's place is protected by the passcode $PASSWORD, more info about the user here: $USERIDINFO"
 done < "/etc/passwd"
