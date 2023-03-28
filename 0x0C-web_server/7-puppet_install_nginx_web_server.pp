@@ -18,7 +18,7 @@ file_line { 'redirect':
 }
 
 exec { 'Restart':
-  require => Exec['Install Nginex'],
+  require => Exec['Install Nginx'],
   command => 'sudo service nginx restart',
   path    => ['/usr/bin', '/bin', '/usr/sbin'],
 }
