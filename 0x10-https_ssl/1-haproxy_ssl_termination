@@ -25,7 +25,7 @@ defaults
         mode    http
         option  httplog
         option  dontlognull
-        option  forwardfor
+        option forwardfor
         timeout connect 5000
         timeout client  50000
         timeout server  50000
@@ -37,13 +37,18 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend web-frontend
+frontend http
         bind *:80
-        bind *:443 ssl crt /etc/ssl/www.gatwan.tech-0001/www.gatwan.tech-0001.pem
-        default_backend web-backend
+        http-request set-header X-Forwarded-Proto http
+	default_backend www-backend
 
-backend web-backend
-        mode http
+frontend www-https
+	bind *:443 ssl crt /etc/haproxy/ssl/www.gatwan.tech.pem
+   	http-request set-header X-Forwarded-Proto https
+   	default_backend www-backend
+
+backend www-backend
         balance roundrobin
-        server 155384-web-01 18.206.202.177 check
-        server 155384-web-02 100.25.31.46 check
+	redirect scheme https if !{ ssl_fc }
+        server 155384-web-01 18.206.202.177:80 check
+        server 155384-web-02 100.25.31.46:80 check
