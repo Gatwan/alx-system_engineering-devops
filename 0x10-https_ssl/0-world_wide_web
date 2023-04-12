@@ -5,25 +5,25 @@ then
     address=$2.$1
     record_type=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 4)
     ip_address=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 5)
-    awk "{print \"The subdomain $2 is a $record_type record and points to $ip_address\"}"
+    echo "The subdomain $2 is a $record_type record and points to $ip_address"
 else
     address="www.$1"
     record_type=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 4)
     ip_address=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 5)
-    awk "{print \"The subdomain www is a $record_type record and points to $ip_address\"}"
+    echo "The subdomain www is a $record_type record and points to $ip_address"
 
     address="lb-01.$1"
     record_type=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 4)
     ip_address=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 5)
-    awk "{print \"The subdomain lb-01 is a $record_type record and points to $ip_address\"}"
+    echo "The subdomain lb-01 is a $record_type record and points to $ip_address"
 
     address="web-01.$1"
     record_type=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 4)
     ip_address=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 5)
-    awk "{print \"The subdomain web-01 is a $record_type and points to $ip_address\"}"
+    echo "The subdomain web-01 is a $record_type and points to $ip_address"
 
     address="web-02.$1"
     record_type=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 4)
     ip_address=$(dig "$address" | grep -A1 'ANSWER SECTION:' | tail --lines=1 | tr "\t" " " | cut -d " " -f 5)
-    awk "{print \"The subdomain web-02 is a $record_type and points to $ip_address\"}"
+    echo "The subdomain web-02 is a $record_type and points to $ip_address"
 fi
