@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 """ Script that gathers data from an API """
 import requests
-import sys
+from sys import argv
 
 
 if __name__ == "__main__":
     url = 'https://jsonplaceholder.typicode.com/'
 
-    user = '{}users/{}'.format(url, sys.argv[1])
+    user = '{}users/{}'.format(url, argv[1])
     res = requests.get(user)
     json_o = res.json()
     print("Employee {} is done with tasks".format(json_o.get('name')), end="")
 
-    todos = '{}todos?userID={}'.format(url, sys.argv[1])
+    todos = '{}todos?userId={}'.format(url, argv[1])
     res = requests.get(todos)
     tasks = res.json()
     l_task = []
@@ -22,4 +22,4 @@ if __name__ == "__main__":
 
     print("({}/{}):".format(len(l_task), len(tasks)))
     for task in l_task:
-        print("\t {}".format(task.get("title")))
+        print("\t {}".format(task.get('title')))
