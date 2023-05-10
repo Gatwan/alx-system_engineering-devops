@@ -9,9 +9,13 @@ def top_ten(subreddit):
     url = "https://www.reddit.com/r/" + subreddit + "/hot.json"
     response = get(url, allow_redirects=False, headers={'User-Agent': "myKey"},
                    params={'limit': 10})
-    if response.status_code == 404:
+    if response.status_code != 200:
         print(None)
         return
-
-    for res in response.json().get("data").get('children'):
-        print(res.get("data").get("title"))
+    dic = response.json()
+    hot_posts = dic['data']['children']
+    if len(hot_posts) is 0:
+        print(None)
+    else:
+        for post in hot_posts:
+            print(post['data']['title'])
